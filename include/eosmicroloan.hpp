@@ -22,7 +22,7 @@ CONTRACT eosmicroloan : public contract {
     //pseudo code here
     //Handled by the loan officer
     //newLoan
-    
+
     ACTION newloan(name username, float loan_amount, string memo);
 
 //    ACTION getprice(uint64_t pair_id);
@@ -31,7 +31,7 @@ CONTRACT eosmicroloan : public contract {
 
 //get the price from  newdex public table
     ACTION getpricedex(uint64_t pair_id);
-     
+
   //  ACTION getotherloan(uint64_t loanid);
 
     //ACTION issueloan( name username, asset loan_amount);
@@ -70,6 +70,10 @@ name difscopeEOSM = "eosmicroloan"_n;
  loans_table _eosmicroloan = loans_table(difaccEOSM , difscopeEOSM.value );
 
 //typedef existing_type new_type_name ;
+//oracle rates table is from the EOSDT project:
+//https://github.com/equilibrium-eosdt/equilibrium-projects
+// https://eosdt.com/
+//typedefs dervied from ABI file
 
 typedef name n;
 typedef asset a;
@@ -81,8 +85,6 @@ typedef uint32_t u;
 typedef string s;
 //typedef byte b;
 
-
-
 TABLE oracle_rates{
 a rate;
 t update;
@@ -93,7 +95,9 @@ t delphioracle_update;
 a equilibriumdsp_price;
 t equilibriumdsp_update;
 /*
-TABLE orarates{
+//Table as defined in EOSDT github source code.
+
+TABLE oracle_rates{
     ds_asset rate;
     ds_time update;
     ds_asset provablecb1a_price;
@@ -137,7 +141,7 @@ TABLE exchange_pair {
       uint64_t primary_key() const { return pair_id; } //this is the primary key of the table
       EOSLIB_SERIALIZE( exchange_pair, (pair_id)(price_precision)(status)(base_symbol)(quote_symbol)(manager)(list_time)(pair_symbol)(current_price)(base_currency_id)(quote_currency_id)(pair_free)(ext1)(ext2)(extstr) )
 };
-//define the exchange_pair 
+//define the exchange_pair
 typedef multi_index<"exchangepair"_n, exchange_pair> exchangepair_t;
- 
+
 };
